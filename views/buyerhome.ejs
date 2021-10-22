@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>ShopHop</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="#">ShopHop</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		<div class="navbar-nav">
+		  <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+		  <a class="nav-item nav-link" href="#">About Us</a>
+		  <a class="nav-item nav-link" href="#">Contact</a>
+		  <a class="nav-item nav-link" href="#">FAQ</a>
+		</div>
+		<form class="form-inline my-2 my-lg-0 px-2" href="/cart">
+			<button class="btn btn-outline-info my-2 my-sm-0">My Cart</button>
+		</form>
+		<form class="form-inline my-2 my-lg-0 px-2" action="/logout" method="POST">
+			<button class="btn btn-outline-danger my-2 my-sm-0">Logout</button>
+		</form>
+	  </div>
+	</nav>
+	<h1>Hi <%= username%></h1>
+	<p>Welcome to ShopHop!</p>
+	<div class="container">
+	  <div class="row">
+		<div class="col-lg-4 d-flex align-items-stretch">
+			<div class="card" style="width: 18rem;">
+			  <img class="card-img-top" style="height: 15rem;" src="https://m.media-amazon.com/images/I/71mQ9oKDMLL._SL1500_.jpg" alt="Card image cap">
+			  <div class="card-body">
+				<h5 class="card-title">Mi Earphone Basic</h5>
+				<p class="card-text">Category: Accessories</p>
+				<p class="card-text">M.R.P.: ₹599.00.</p>
+				<a href="#" class="btn btn-primary">Add to cart</a>
+			  </div>
+			</div>
+		</div>
+		<div class="col-lg-4 d-flex align-items-stretch">
+			<div class="card" style="width: 18rem;">
+			  <img class="card-img-top" style="height: 15rem;" src="https://m.media-amazon.com/images/I/71i2XhHU3pL._SL1500_.jpg" alt="Card image cap">
+			  <div class="card-body">
+				<h5 class="card-title">Apple iPhone 11 (64GB) - Black</h5>
+				<p class="card-text">Mobile Phones</p>
+				<p class="card-text">M.R.P.: ₹49,900.00</p>
+				<a href="#" class="btn btn-primary">Add to cart</a>
+			  </div>
+			</div>
+		</div>
+		<div class="col-lg-4 d-flex align-items-stretch">
+			<div class="card" style="width: 18rem;">
+			  <img class="card-img-top" style="height: 15rem;" src="https://images-na.ssl-images-amazon.com/images/I/5160dwNeqSL._SX323_BO1,204,203,200_.jpg" alt="Card image cap">
+			  <div class="card-body">
+				<h5 class="card-title">Harry Potter and the Philosopher's Stone</h5>
+				<p class="card-text">Category: books</p>
+				<p class="card-text">M.R.P.: ₹284.00</p>
+				<a href="#" class="btn btn-primary">Add to cart</a>
+			  </div>
+			</div>
+		</div>
+	  </div>
+	</div>
+	
+</body>
+</html>
