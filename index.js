@@ -6,6 +6,7 @@ const session = require('express-session');
 const path = require('path');
 const Buyer = require('./models/buyer')
 const Seller = require('./models/seller')
+const Product = require('./models/product')
 
 mongoose.connect('mongodb://localhost:27017/shophop', { useNewUrlParser: true })
 	.then(()=>{
@@ -20,6 +21,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'))
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static( "public" ));
 app.use(session({ secret: 'thisaverygoodsecret'} ))
 
 const buyerLogin = (req, res, next) => {
@@ -30,7 +32,6 @@ const buyerLogin = (req, res, next) => {
 }
 
 const sellerLogin = (req, res, next) => {
-
 	if(!req.session.seller_id){
 		return res.redirect('/sellerlogin')
 	}
@@ -73,6 +74,44 @@ app.post('/login', async(req, res) => {
 	}
 })
 
+app.get('/home', buyerLogin, async(req, res) => {
+	const buyer_id = req.session.buyer_id
+	const buyer = await Buyer.findOne({ _id: buyer_id })
+	const username = buyer.username
+	Product.find({}, function(err, allProducts){
+        if(err){
+           console.log(err);
+        } else 
+           res.render('buyerhome', { username , products: allProducts})
+        })
+})
+
+app.get('/cart', buyerLogin, (req, res) => {
+	Buyer.findOne({ _id: req.session.buyer_id }, function(err, buyer){
+        if(err){
+           console.log(err);
+        } else {
+           Product.find({ _id: buyer.cart_items }, function(err, items){
+           if(err){
+		   console.log(err);
+		} else {
+		   res.render('cart', { buyer, items })
+		}
+           })
+        }
+        })
+})
+
+app.post('/addtocart/:id', buyerLogin, (req, res) => {
+	Buyer.updateOne({ _id: req.session.buyer_id }, { $push: {cart_items: req.params.id }}, function(err, buyer){
+        if(err){
+           console.log(err);
+        } else {
+           res.redirect('/home')
+        }
+        })
+})
+
 app.post('/logout', (req, res) => {
 	req.session.destroy()
 	res.redirect('/login')
@@ -111,13 +150,6 @@ app.post('/sellerlogout', (req, res) => {
 	res.redirect('/sellerlogin')
 })
 
-app.get('/home', buyerLogin, async(req, res) => {
-	const buyer_id = req.session.buyer_id
-	const buyer = await Buyer.findOne({ _id: buyer_id })
-	const username = buyer.username
-	res.render('buyerhome', { username })
-})
-
 app.get('/sellerhome', sellerLogin, async(req, res) => {
 	const seller_id = req.session.seller_id
 	const seller = await Seller.findOne({ _id: seller_id })
@@ -137,7 +169,7 @@ app.get('*', (req, res) => {
 	res.render('undefined')
 })
 
-const port = 3000;
+const port = 3001;
 app.listen(port, () => {
 	console.log(`Server running on Port ${port}`)
 })

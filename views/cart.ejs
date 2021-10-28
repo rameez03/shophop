@@ -14,14 +14,11 @@
 	  </button>
 	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		<div class="navbar-nav">
-		  <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+		  <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
 		  <a class="nav-item nav-link" href="#">About Us</a>
 		  <a class="nav-item nav-link" href="#">Contact</a>
 		  <a class="nav-item nav-link" href="#">FAQ</a>
 		</div>
-		<form class="form-inline my-2 my-lg-0 px-2" action="/cart" method="GET">
-			<button class="btn btn-outline-info my-2 my-sm-0">My Cart</button>
-		</form>
 		<form class="form-inline my-2 my-lg-0 px-2" action="/orders" method="GET">
 			<button class="btn btn-outline-primary my-2 my-sm-0">My Orders</button>
 		</form>
@@ -30,28 +27,30 @@
 		</form>
 	  </div>
 	</nav>
-	<h1>Hi <%= username%></h1>
-	<p>Welcome to ShopHop!</p>
-	<div class="container">
-	       <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-		<% products.forEach(function(product){ %>
-		    <div class="col-lg-4 d-flex align-items-stretch">
-				<div class="card" style="width: 18rem;">
-				  <img class="card-img-top" style="height: 15rem;" src="/images/<%= product.images[1]%>" alt="Card image cap">
-				  <div class="card-body">
-					<h5 class="card-title"><%= product.title %></h5>
-					<h6 class="card-text">Price: ₹ <%= product.price %></h6>
-					<p class="card-text">Category: <%= product.category %></p>
-					<p class="card-text">Sold By: <%= product.soldby.username %></p>
-					<form action="/addtocart/<%= product._id %>" method="POST">
-						<button type="submit" class="btn btn-primary">Add to Cart</button>
-					</form>
-				  </div>
-				</div>
+	<div class="jumbotron">
+	  <h2 class="display-4">About us</h2>
+	  <p class="lead">ShopHop is an online shopping platform where you can buy all the things from grocery to fashion at one place.</p>
+	  <h4>Welcome <%= buyer.username %></h4>
+	  <h6>My cart:</h6>
+	  <ul class="list-group">
+	  <% items.forEach(function(item){ %>
+	  	<li class="list-group-item">
+	  		<div class="card" style="width: 18rem;">
+			  <img class="card-img-top" src="/images/<%= item.images[1]%>" alt="Card image cap" style="height: 8rem; width: 8rem">
+			  <div class="card-body">
+			    <h5 class="card-title"><%= item.title %></h5>
+			    <p class="card-text">Price: ₹ <%= item.price %></p>
+			  </div>
 			</div>
-		<% }); %>
-		</div>
+	  	</li>
+	  <% }); %>
+	  </ul>
+	  <button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+		<script>
+		function goBack() {
+		  window.history.back();
+		}
+		</script> 
 	</div>
-	
 </body>
 </html>
