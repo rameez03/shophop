@@ -19,21 +19,17 @@
 		  <a class="nav-item nav-link" href="#">Contact</a>
 		  <a class="nav-item nav-link" href="#">FAQ</a>
 		</div>
-		<form class="form-inline my-2 my-lg-0 px-2" action="/cart" method="GET">
-			<button class="btn btn-outline-info my-2 my-sm-0">My Cart</button>
-		</form>
-		<form class="form-inline my-2 my-lg-0 px-2" action="/orders" method="GET">
-			<button class="btn btn-outline-primary my-2 my-sm-0">My Orders</button>
-		</form>
-		<form class="form-inline my-2 my-lg-0 px-2" action="/logout" method="POST">
+		<form class="form-inline my-2 my-lg-0 px-2" action="/seller/logout" method="POST">
 			<button class="btn btn-outline-danger my-2 my-sm-0">Logout</button>
 		</form>
 	  </div>
 	</nav>
-	<h1>Hi <%= username%></h1>
+	<h1>Welcome <%= username%></h1>
 	<p>Welcome to ShopHop!</p>
 	<div class="container">
-	       <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+		<a href="/seller/listitem" class="btn btn-primary btn-lg" role="button">List an Item</a>
+		<h2>Your Listings:</h2>
+		<div class="row text-center" style="display:flex; flex-wrap: wrap;">
 		<% products.forEach(function(product){ %>
 		    <div class="col-lg-4 d-flex align-items-stretch">
 				<div class="card" style="width: 18rem;">
@@ -42,9 +38,15 @@
 					<h5 class="card-title"><%= product.title %></h5>
 					<h6 class="card-text">Price: ₹ <%= product.price %></h6>
 					<p class="card-text">Category: <%= product.category %></p>
-					<p class="card-text">Sold By: <%= product.soldby.username %></p>
-					<form action="/addtocart/<%= product._id %>" method="POST">
-						<button type="submit" class="btn btn-primary">Add to Cart</button>
+					<p class="card-text">Quantity: <%= product.quantity %></p>
+					<form action="#" method="POST" class="py-1">
+						<button type="submit" class="btn btn-info btn-sm" >Change Price</button>
+					</form>
+					<form action="#" method="POST" class="py-1">
+						<button type="submit" class="btn btn-info btn-sm">Change Quantity</button>
+					</form>
+					<form action="/addtocart/<%= product._id %>" method="POST" class="py-1">
+						<button type="submit" class="btn btn-danger btn-sm">Unlist Item</button>
 					</form>
 				  </div>
 				</div>

@@ -22,7 +22,7 @@
 		<form class="form-inline my-2 my-lg-0 px-2" action="/orders" method="GET">
 			<button class="btn btn-outline-primary my-2 my-sm-0">My Orders</button>
 		</form>
-		<form class="form-inline my-2 my-lg-0 px-2" action="/logout" method="POST">
+		<form class="form-inline my-2 my-lg-0 px-2" action="/buyer/logout" method="POST">
 			<button class="btn btn-outline-danger my-2 my-sm-0">Logout</button>
 		</form>
 	  </div>
@@ -45,6 +45,8 @@
 	  	</li>
 	  <% }); %>
 	  </ul>
+	  <h4>Final cart Value: <%= sum %></h4>
+	  <button type="button" class="btn btn-info">Checkout</button>
 	  <button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
 		<script>
 		function goBack() {
