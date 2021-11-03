@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>ShopHop</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="#">ShopHop</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		<div class="navbar-nav">
+		  <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+		  <a class="nav-item nav-link" href="/aboutus">About Us</a>
+		  <a class="nav-item nav-link" href="#">Contact</a>
+		  <a class="nav-item nav-link" href="#">FAQ</a>
+		</div>
+	  </div>
+	</nav>
+	<div class="jumbotron">
+	  <h1 class="display-4">ShopHop</h1>
+	  <p class="lead">Become a Seller on our platform.</p>
+	  <hr class="my-4">
+		<div class="card" style="width: 25rem;">
+			<div class="card-header">Seller Signup</div>
+			<div class="card-body">
+				<form action="/sellersignup" method="POST">
+				  <div class="form-group">
+					<label for="username">Username</label>
+					<input type="text" class="form-control" name="username" id="username" placeholder="Pick a username">
+				  </div>
+				  <div class="form-group">
+					<label for="email">Email address</label>
+					<input type="email" class="form-control" name="email" id="email"  placeholder="Enter email">
+				  </div>
+				  <div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+				  </div>
+				  <div class="form-group">
+					<label for="phone">Phone No.</label>
+					<input type="text" class="form-control" name="phone" id="phone" placeholder="Enter your phone number">
+				  </div>
+				  <div class="form-group">
+				    <label for="city">City</label>
+				    <select class="form-control" name="city" id="city" placeholder="Choose your city">
+					<option>Agra</option>
+					<option>Ahemdabad</option>
+					<option>Banglore</option>
+					<option>Bhopal</option>
+					<option>Chennai</option>
+					<option>Delhi</option>
+					<option>Ghaziabad</option>
+					<option>Gurugram</option>
+					<option>Hyderabad</option>
+					<option>Indore</option>
+					<option>Jaipur</option>
+					<option>Kanpur</option>
+					<option>Kolkata</option>
+					<option>Lucknow</option>
+					<option>Ludhiana</option>
+					<option>Meeerut</option>
+					<option>Mumbai</option>
+					<option>Noida</option>
+					<option>Nagpur</option>
+					<option>Patna</option>
+					<option>Pune</option>
+					<option>Surat</option>
+					<option>Thane</option>
+					<option>Vadodara</option>
+					<option>Visakhapatnam</option>
+					<option>Others</option>
+				    </select>
+				  </div>
+				  <button type="submit" class="btn btn-primary">Signup</button>
+				</form>
+				<p class="lead">Already a seller? <a href="/sellerlogin">Login</a> here</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>ShopHop</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="#">ShopHop</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		<div class="navbar-nav">
+		  <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+		  <a class="nav-item nav-link" href="#">About Us</a>
+		  <a class="nav-item nav-link" href="#">Contact</a>
+		  <a class="nav-item nav-link" href="#">FAQ</a>
+		</div>
+		<form class="form-inline my-2 my-lg-0 px-2" action="/orders" method="GET">
+			<button class="btn btn-outline-primary my-2 my-sm-0">My Orders</button>
+		</form>
+		<form class="form-inline my-2 my-lg-0 px-2" action="/buyer/logout" method="POST">
+			<button class="btn btn-outline-danger my-2 my-sm-0">Logout</button>
+		</form>
+	  </div>
+	</nav>
+	<div class="jumbotron">
+	  <h2 class="display-4">About us</h2>
+	  <p class="lead">ShopHop is an online shopping platform where you can buy all the things from grocery to fashion at one place.</p>
+	  <h4>Welcome <%= buyer.username %></h4>
+	  <h6>My cart:</h6>
+	  <ul class="list-group">
+	  <% items.forEach(function(item){ %>
+	  	<li class="list-group-item">
+	  		<div class="card" style="width: 18rem;">
+			  <img class="card-img-top" src="/images/<%= item.images[1]%>" alt="Card image cap" style="height: 8rem; width: 8rem">
+			  <div class="card-body">
+			    <h5 class="card-title"><%= item.title %></h5>
+			    <p class="card-text">Price: ₹ <%= item.price %></p>
+			  </div>
+			</div>
+	  	</li>
+	  <% }); %>
+	  </ul>
+	  <h4>Final cart Value: <%= sum %></h4>
+	  <button type="button" class="btn btn-info">Checkout</button>
+	  <button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+		<script>
+		function goBack() {
+		  window.history.back();
+		}
+		</script> 
+	</div>
+</body>
+</html>
