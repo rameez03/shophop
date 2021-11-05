@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoSanitize = require('express-mongo-sanitize');
 const app = express();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
@@ -38,6 +39,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'))
 
 app.use(flash());
+app.use(mongoSanitize());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static( "public" ));
 app.use(session({ secret: 'thisaverygoodsecret'} ))
