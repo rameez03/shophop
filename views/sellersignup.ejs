@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<title>ShopHop</title>
-</head>
+<%- include('./partials/header'); -%>
+
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <a class="navbar-brand" href="#">ShopHop</a>
@@ -22,10 +16,12 @@
 	  </div>
 	</nav>
 	<div class="jumbotron">
+	<div class="text-center">
 	  <h1 class="display-4">ShopHop</h1>
 	  <p class="lead">Become a Seller on our platform.</p>
 	  <hr class="my-4">
-		<div class="card" style="width: 25rem;">
+	</div>
+		<div class="card mx-auto" style="width: 25rem;">
 			<div class="card-header">Seller Signup</div>
 			<div class="card-body">
 				<form action="/sellersignup" method="POST">
