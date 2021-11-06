@@ -16,37 +16,42 @@
 		<form class="form-inline my-2 my-lg-0 px-2" action="/buyer/cart" method="GET">
 			<button class="btn btn-outline-info my-2 my-sm-0">My Cart</button>
 		</form>
-		<form class="form-inline my-2 my-lg-0 px-2" action="/buyer/order" method="GET">
-			<button class="btn btn-outline-primary my-2 my-sm-0">My Orders</button>
-		</form>
 		<form class="form-inline my-2 my-lg-0 px-2" action="/buyer/logout" method="POST">
 			<button class="btn btn-outline-danger my-2 my-sm-0">Logout</button>
 		</form>
 	  </div>
 	</nav>
 	<div class="jumbotron">
-		<h1>Welcome <%= username%></h1>
-		<h5>Welcome to ShopHop. Shop from our wide range of products!</h5>
-		<div class="container">
-		       <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-			<% products.forEach(function(product){ %>
-			    <div class="col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch py-3">
-					<div class="card" style="width: 18rem;">
-					  <img class="card-img-top" style="height: 15rem;" src="/images/<%= product.images[0]%>" alt="Card image cap">
-					  <div class="card-body">
-						<h5 class="card-title"><%= product.title %></h5>
-						<h6 class="card-text">Price: ₹ <%= product.price %></h6>
-						<p class="card-text">Category: <%= product.category %></p>
-						<p class="card-text">Sold By: <%= product.soldby.username %></p>
-						<form action="/buyer/addtocart/<%= product._id %>" method="POST">
-							<button type="submit" class="btn btn-primary">Add to Cart</button>
-						</form>
-					  </div>
-					</div>
-				</div>
-			<% }); %>
+	<h6>My Orders:</h6>
+	  <ul class="list-group">
+	  <% orders.forEach(function(order){ %>
+	  	<li class="list-group-item">
+	  		<div class="card" style="width: 18rem;">
+			  <img class="card-img-top" src="/images/<%= order.item_image %>" alt="Card image cap" style="height: 8rem; width: 8rem">
+			  <div class="card-body">
+			    <p class="card-text">Item: <%= order.item_name %></p>
+			    <p class="card-text">Price: ₹ <%= order.order_price %></p>
+			    <p class="card-text">Ordered On: ₹ <%= order.order_date %></p>
+			    <p class="card-text">Status <%= order.status %></p>
+			    <% if (order.status != "delivered"){ %>
+			    	<p class="card-text">Expected delivery by: ₹ <%= order.delivery_date %></p>
+			    <% } %>
+			  </div>
 			</div>
-		</div>
+	  	<form action="/buyer/cancel/<%= order._id %>" method="POST">
+			<button type="submit" class="btn btn-warning">Cancel Order</button>
+		</form>
+		</li>
+	  <% }); %>
+	  </ul>
+	  
+	  <button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
+		<script>
+		function goBack() {
+		  window.history.back();
+		}
+		</script> 
 	</div>
+	
 </body>
 </html>
