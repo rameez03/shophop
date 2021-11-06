@@ -15,7 +15,10 @@ const buyerSchema = new mongoose.Schema({
 		required: [true, 'Password cannot be blank!']
 	},
 	cart_items: [mongoose.Schema.Types.ObjectId],
-	ordered_items: [mongoose.Schema.Types.ObjectId]
+	cart_val: {
+		type: Number,
+		default: 0
+	}
 })
 
 buyerSchema.statics.validateBuyer = async function (email, password) { 
