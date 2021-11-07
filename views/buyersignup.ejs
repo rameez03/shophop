@@ -1,5 +1,11 @@
-<%- include('./partials/header'); -%>
-
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>ShopHop</title>
+</head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <a class="navbar-brand" href="#">ShopHop</a>
@@ -16,29 +22,39 @@
 	  </div>
 	</nav>
 	<div class="jumbotron">
-		<div class="text-center">
-		  <h1 class="display-4">ShopHop</h1>
-		  <p class="lead">One stop solution for all your shopping needs.</p>
-		  <hr class="my-4">
-		</div>
-		<div class="card mx-auto" style="width: 25rem;">
+	  <h1 class="display-4">ShopHop</h1>
+	  <p class="lead">One stop solution for all your shopping needs.</p>
+	  <hr class="my-4">
+		<div class="card" style="width: 25rem;">
 			<div class="card-header">Signup</div>
 			<div class="card-body">
 				<form action="/signup" method="POST">
-				  <div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" class="form-control" name="username" id="username" placeholder="Pick a username">
-				  </div>
-				  <div class="form-group">
-					<label for="email">Email address</label>
-					<input type="email" class="form-control" name="email" id="email"  placeholder="Enter email">
-				  </div>
-				  <div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" class="form-control" name="password" id="password" placeholder="Password">
-				  </div>
-				  <button type="submit" class="btn btn-primary">Signup</button>
-				</form>
+					<div class="form-group">
+					  <label for="username">Username</label>
+					  <input type="text" class="form-control" name="username" id="username" placeholder="Pick a username">
+					</div>
+					<div class="form-group">
+						<div class="form-group"><label for="email">Email address</label>
+						  <input type="email" class="form-control" name="email" id="email"  placeholder="Enter email"></div>
+				<button type="submit" name="action" formaction="/send" >Generate Otp</button>  
+					  <input type="text" class="form-control"  name="otpemail" id="otpemail"  placeholder="otpemail">
+					 <button type="submit" name="action" formaction="/verify" >Verify</button> 
+					 <button type="submit" name="action" formaction="/resend" >Resend OTP</button> 
+					</div>
+					<div class="form-group">
+					  <label for="dob">Enter Date of Birth</label>
+					  <input type="date" class="form-control" name="dob" id="dob" placeholder="Date of Birth">
+					</div>
+					<div class="form-group">
+					  <label for="password">Password</label>
+					  <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+					</div>
+					<div class="form-group">
+					  <label for="password">Confirm Password</label>
+					  <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Confirm Password">
+					</div>
+					<button type="submit" class="btn btn-primary">Signup</button>
+				  </form>
 				<p class="lead">Already registered? <a href="/login">Login</a> here</p>
 			</div>
 		</div>

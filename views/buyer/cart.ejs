@@ -1,5 +1,11 @@
-<%- include('../partials/header'); -%>
-
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>ShopHop</title>
+</head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <a class="navbar-brand" href="#">ShopHop</a>
@@ -13,7 +19,7 @@
 		  <a class="nav-item nav-link" href="#">Contact</a>
 		  <a class="nav-item nav-link" href="#">FAQ</a>
 		</div>
-		<form class="form-inline my-2 my-lg-0 px-2" action="/buyer/order" method="GET">
+		<form class="form-inline my-2 my-lg-0 px-2" action="/orders" method="GET">
 			<button class="btn btn-outline-primary my-2 my-sm-0">My Orders</button>
 		</form>
 		<form class="form-inline my-2 my-lg-0 px-2" action="/buyer/logout" method="POST">
@@ -22,28 +28,26 @@
 	  </div>
 	</nav>
 	<div class="jumbotron">
-	  <h2>My Cart:</h2>
-	  <ul class="list-group py-2">
+	  <h2 class="display-4">About us</h2>
+	  <p class="lead">ShopHop is an online shopping platform where you can buy all the things from grocery to fashion at one place.</p>
+	  <h4>Welcome <%= buyer.username %></h4>
+	  <h6>My cart:</h6>
+	  <ul class="list-group">
 	  <% items.forEach(function(item){ %>
-	  	<li class="list-group-item row">
-	  		<div class="card">
-			  <img class="card-img-top" src="/images/<%= item.images[0]%>" alt="Card image cap" style="height: 8rem; width: 8rem">
+	  	<li class="list-group-item">
+	  		<div class="card" style="width: 18rem;">
+			  <img class="card-img-top" src="/images/<%= item.images[1]%>" alt="Card image cap" style="height: 8rem; width: 8rem">
 			  <div class="card-body">
 			    <h5 class="card-title"><%= item.title %></h5>
 			    <p class="card-text">Price: ₹ <%= item.price %></p>
 			  </div>
-			  <form class="form-inline py-2 px-2" action="/buyer/deletefromcart/<%= item._id %>" method="POST">
-				<button class="btn btn-outline-danger btn-sm">Delete Product</button>
-			  </form>
 			</div>
 	  	</li>
 	  <% }); %>
 	  </ul>
-	  <h4>Final cart Value: ₹ <%= sum %></h4>
-	  <form class="form-inline py-2 px-2" action="/buyer/checkout" method="GET">
-		<button class="btn btn-info">Checkout</button>
-	  </form>
-	  <button type="button" class="btn btn-warning mx-2 px-3" onclick="goBack()">Go Back</button>
+	  <h4>Final cart Value: <%= sum %></h4>
+	  <button type="button" class="btn btn-info">Checkout</button>
+	  <button type="button" class="btn btn-warning" onclick="goBack()">Go Back</button>
 		<script>
 		function goBack() {
 		  window.history.back();

@@ -14,6 +14,9 @@ const sellerSchema = new mongoose.Schema({
 		type: String,
 		required: [true, 'Password cannot be blank!']
 	},
+	otpemail:{
+		type: String
+	},
 	phone: {
 		type: String,
 		required: [true, 'Phone number cannot be blank!']
@@ -22,13 +25,13 @@ const sellerSchema = new mongoose.Schema({
 		type: String,
 		required: [true, 'City cannot be blank!']
 	},
-	document:  {
-		type: String,
-		required: [true, 'City cannot be blank!']
+	isverified:{
+		type:Boolean,
+		default:false
 	},
-	isApproved: {
-		type: Boolean,
-		default: false
+	isverifiedAdmin:{
+		type:Boolean,
+		default:false
 	}
 })
 

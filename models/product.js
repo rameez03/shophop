@@ -10,7 +10,6 @@ const productSchema = new mongoose.Schema({
 		required: [true, 'Description cannot be blank!']
 	},
 	price: Number,
-	quantity: Number,
 	category: String,
 	images: {
 		type: [String],
@@ -21,10 +20,6 @@ const productSchema = new mongoose.Schema({
 		 ref: "Seller"
 		},
 		username: String
-	},
-	listed: {
-		type: Boolean,
-		default: true
 	}
 })
 

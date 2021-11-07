@@ -4,21 +4,29 @@ const bcrypt = require('bcrypt');
 const buyerSchema = new mongoose.Schema({
 	email: {
 		type: String,
-		required: [true, 'Email cannot be blank!']
+		required: [true, 'Email cannot be blank!'],
+		unique:true	
+	},
+	otpemail:{
+		type: String
 	},
 	username: {
 		type: String,
 		required: [true, 'Username cannot be blank!']
 	},
+	dob: {
+		type: Date,
+		required: [true, 'Date of birth cannot be blank!'],
+	},
 	password: {
 		type: String,
 		required: [true, 'Password cannot be blank!']
 	},
+	isverified:{
+		type:Boolean
+	},
 	cart_items: [mongoose.Schema.Types.ObjectId],
-	cart_val: {
-		type: Number,
-		default: 0
-	}
+	ordered_items: [mongoose.Schema.Types.ObjectId]
 })
 
 buyerSchema.statics.validateBuyer = async function (email, password) { 
