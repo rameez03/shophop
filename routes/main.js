@@ -1,8 +1,22 @@
 const express = require('express');
 const router  = express.Router();
+const multer = require('multer');
+const path = require('path');
 
 const Buyer = require('../models/buyer')
 const Seller = require('../models/seller')
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        const docPath = path.join(__dirname, '../public/documents');
+        cb(null, docPath);
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+var upload = multer({ storage: storage })
 
 router.get('/', (req, res) => {
 	res.render('landing')
@@ -44,9 +58,11 @@ router.get('/sellersignup', (req, res) => {
 	res.render('sellersignup')
 })
 
-router.post('/sellersignup', async(req, res) => {
+router.post('/sellersignup', upload.single('doc'), async(req, res) => {
+	var document = req.file.filename
 	const { username, email, password, phone, city } = req.body;
-	const seller = new Seller({ username, email, password, phone, city })
+	var isApproved = false
+	const seller = new Seller({ username, email, password, phone, city, document, isApproved })
 	await seller.save();
 	res.redirect('/sellerlogin')
 })
@@ -58,18 +74,33 @@ router.get('/sellerlogin', (req, res) => {
 
 router.post('/sellerlogin', async(req, res) => {
 	const { email, password } = req.body;
-	const foundSeller = await Seller.validateSeller(email, password)
-	if(foundSeller){
-		req.session.seller_id = foundSeller._id
-		res.redirect('/seller/home')
+	const sellerExist = await Seller.findOne({ email });
+	if(sellerExist){
+		const sellerApproved = sellerExist.isApproved
+		if(!sellerApproved){
+			res.send('seller not approved')
+		}
+		else{
+			const foundSeller = await Seller.validateSeller(email, password)
+			if(foundSeller){
+				req.session.seller_id = foundSeller._id
+				res.redirect('/seller/home')
+			}
+			else{
+				res.redirect('/sellerlogin')
+			}
+		}
 	}
-	else{
+	else {
 		res.redirect('/sellerlogin')
 	}
 })
 
 router.post('/logout', (req, res) => {
-	req.session.destroy()
+	if(req.session) {
+		req.session.auth = null
+		req.session.destroy()
+	}
 	res.redirect('/')
 })
 

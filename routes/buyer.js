@@ -62,6 +62,16 @@ router.post('/addtocart/:id', buyerLogin, (req, res) => {
         })
 })
 
+router.post('/deletefromcart/:id', buyerLogin, (req, res) => {
+	Buyer.updateOne({ _id: req.session.buyer_id }, { $pull: {cart_items: req.params.id }}, function(err, buyer){
+        if(err){
+           console.log(err);
+        } else {
+           res.redirect('/buyer/cart')
+        }
+        })
+})
+
 router.get('/checkout', buyerLogin, (req, res) => {
 	Buyer.findOne({ _id: req.session.buyer_id }, function(err, buyer){
 		if(err){
@@ -141,7 +151,10 @@ router.get('/order', buyerLogin, (req, res) => {
 })
 
 router.post('/logout', (req, res) => {
-	req.session.destroy()
+	if(req.session) {
+		req.session.auth = null
+		req.session.destroy()
+	}
 	res.redirect('/login')
 })
 

@@ -1,10 +1,11 @@
 const express = require('express');
 const router  = express.Router();
-const Seller = require('../models/seller')
-const Product = require('../models/product')
 const path = require('path');
 const multer = require('multer');
 const ObjectId = require('mongodb').ObjectId;
+
+const Seller = require('../models/seller')
+const Product = require('../models/product')
 
 const sellerLogin = (req, res, next) => {
 	if(!req.session.seller_id){
@@ -99,7 +100,11 @@ router.post('/unlistitem/:id', sellerLogin, (req, res) => {
 })
 
 router.post('/logout', (req, res) => {
-	req.session.destroy()
+	if(req.session) {
+		req.session.auth = null
+		req.session.destroy()
+	}
+	res.redirect('/login')
 	res.redirect('/sellerlogin')
 })
 

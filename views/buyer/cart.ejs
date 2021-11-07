@@ -27,11 +27,14 @@
 	  <% items.forEach(function(item){ %>
 	  	<li class="list-group-item row">
 	  		<div class="card">
-			  <img class="card-img-top" src="/images/<%= item.images[1]%>" alt="Card image cap" style="height: 8rem; width: 8rem">
+			  <img class="card-img-top" src="/images/<%= item.images[0]%>" alt="Card image cap" style="height: 8rem; width: 8rem">
 			  <div class="card-body">
 			    <h5 class="card-title"><%= item.title %></h5>
 			    <p class="card-text">Price: ₹ <%= item.price %></p>
 			  </div>
+			  <form class="form-inline py-2 px-2" action="/buyer/deletefromcart/<%= item._id %>" method="POST">
+				<button class="btn btn-outline-danger btn-sm">Delete Product</button>
+			  </form>
 			</div>
 	  	</li>
 	  <% }); %>
