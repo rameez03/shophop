@@ -21,6 +21,14 @@ const sellerSchema = new mongoose.Schema({
 	city: {
 		type: String,
 		required: [true, 'City cannot be blank!']
+	},
+	document:  {
+		type: String,
+		required: [true, 'City cannot be blank!']
+	},
+	isApproved: {
+		type: Boolean,
+		default: false
 	}
 })
 

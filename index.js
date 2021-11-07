@@ -1,8 +1,8 @@
 const express = require('express');
+const bodyparser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const bodyparser = require('body-parser');
 const flash = require("connect-flash")
 const session = require('express-session');
 const path = require('path');
@@ -39,10 +39,10 @@ app.set('views', path.join(__dirname, '/views'))
 
 app.use(flash());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static( "public" ));
+app.use(express.static('public'));
 app.use(session({ secret: 'thisaverygoodsecret'} ))
-app.use(bodyparser.urlencoded({extended:false}))
 app.use(bodyparser.json())
+app.use(bodyparser.urlencoded({ extended:true }))
 
 app.use("/", mainRoutes);
 app.use("/buyer", buyerRoutes);
