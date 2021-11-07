@@ -40,7 +40,7 @@ app.set('views', path.join(__dirname, '/views'))
 app.use(flash());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use(session({ secret: 'thisaverygoodsecret'} ))
+app.use(session({ secret: 'thisabadandgoodsecret'} ))
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({ extended:true }))
 
